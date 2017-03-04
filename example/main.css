@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300');
+
 html, body {
-  background-color: white;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: #1A4040;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 500px;
+  height: auto;
+  min-height: 60px;
+}
+
+.rd-tab {
+  font-size: 24px;
+  font-family: 'Lato', sans-serif;  
 }

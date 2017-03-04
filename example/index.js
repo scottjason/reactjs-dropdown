@@ -4,8 +4,24 @@ import ReactDropdown from '../index.js';
 
 class App extends Component {
   render() {
+
+    let opts = {
+      tabWidth: 500,
+      tabHeight: 75,
+      tabs: [
+        { name: 'EXTRA SMALL' }, 
+        { name: 'SMALL' }, 
+        { name: 'MEDIUM', isSelected: true }, 
+        { name: 'LARGE' },
+        { name: 'EXTRA LARGE' }
+      ],
+      bgColor: '#4EBABA'
+    };
+    
     return (
-      <ReactDropdown />
+      <div className='container'>
+        <ReactDropdown opts={opts} />
+      </div>
     )
   }
 }

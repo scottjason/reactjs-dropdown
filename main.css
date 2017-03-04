@@ -1,0 +1,30 @@
+.rd-wrap {
+  position: absolute;
+  margin: 0;
+  width: auto;
+  height: auto;
+}
+.rd-tab-container {
+  margin: 0;
+  padding: 0;
+}
+.rd-tab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style: none;
+  text-align: center;
+  color: #fff;
+  border-bottom: 1px solid #d9d9d9;
+  cursor: pointer;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+      -ms-user-select: none !important;
+          user-select: none !important;
+}

@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "ecstatic -p 3000 example & npm run watch",
-    "watch": "watchify example/index.js -p browserify-hmr -o example/dist/index.js -dv",
+    "watch": "watchify example/index.js -p browserify-hmr -t browserify-css -o example/dist/index.js -dv & stylus -u autoprefixer-stylus -w main.styl -o main.css",
     "build": "./node_modules/.bin/babel index.js -o dist/index.js",
     "prepublish": "npm run build"
   },
@@ -28,18 +28,33 @@
       "babelify"
     ]
   },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015",
+      "stage-0"
+    ]
+  },
+  "peerDependencies": {
+    "webpack": "^2.1.0-beta"
+  },  
   "devDependencies": {
+    "autoprefixer-stylus": "^0.13.0",
     "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
+    "browserify-css": "^0.10.0",
     "browserify-hmr": "^0.3.5",
     "classnames": "^2.2.5",
     "ecstatic": "^2.1.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "watchify": "^3.9.0"
+    "watchify": "^3.9.0",
+    "webpack": "^2.2.1"
   }
 }
