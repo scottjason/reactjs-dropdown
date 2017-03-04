@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-class ReactDropdown extends React.Component {
+class ReactDropdown extends Component {
   render() {
     return (
       <div>DROPDOWN</div>
     )
   }
 }
+
 export default ReactDropdown;
