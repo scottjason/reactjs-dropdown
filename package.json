@@ -2,7 +2,7 @@
   "name": "reactjs-dropdown",
   "version": "1.0.0",
   "description": "dropdown component for react",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "./node_modules/.bin/babel index.js -o dist/index.js",
     "prepublish": "npm run build"
