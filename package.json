@@ -1,0 +1,30 @@
+{
+  "name": "reactjs-dropdown",
+  "version": "1.0.0",
+  "description": "dropdown component for react",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/babel index.js -o dist/index.js",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/scottjason/reactjs-dropdown.git"
+  },
+  "keywords": [
+    "react",
+    "dropdown"
+  ],
+  "author": "Scott Jason",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scottjason/reactjs-dropdown/issues"
+  },
+  "homepage": "https://github.com/scottjason/reactjs-dropdown#readme",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0"
+  }
+}
