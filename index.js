@@ -15,18 +15,24 @@ class ReactDropdown extends Component {
     let tabs = this.state.opts.tabs;
     this.state.dropdownHeight = tabs.map(this.extractHeight).reduce(this.sum);
   }
+  sum(a, v) {
+    return a + v;
+  } 
   extractHeight(o) {
     return o.height;
   }
-  sum(a, v) {
-    return a + v;
+  isTitle(tab) {
+    if (tab.isTitle) {
+      return tab;
+    }
   }
-  selectAll(tab) {
-    tab.isSelected = true;
-    return tab;
+  isNotTitle(tab) {
+    if (!tab.isTitle) {
+      return tab;
+    }
   }  
-  bySelected(tab) {
-    return tab.isSelected ? tab : null;
+  toggleDropdown() {
+    this.setState({ isOpen: !this.state.isOpen });
   }
   toggleSelected(tabSelected) {
     return (tab)=> {
@@ -37,22 +43,9 @@ class ReactDropdown extends Component {
   onSelectTab(tab) {
     let { tabs } = this.state.opts;
     this.state.opts.tabs = tabs.map(this.toggleSelected(tab));
-    this.toggle();
+    this.toggleDropdown();
     if (!tab.isTitle) {
       this.props.onTabSelected.call(this, tab);
-    }
-  }
-  toggle() {
-    this.setState({ isOpen: !this.state.isOpen });
-  }
-  isTitle(tab) {
-    if (tab.isTitle) {
-      return tab;
-    }
-  }
-  isNotTitle(tab) {
-    if (!tab.isTitle) {
-      return tab;
     }
   }
   render() {
@@ -83,7 +76,7 @@ class ReactDropdown extends Component {
               className='rd-tab'
               onClick={this.onSelectTab.bind(this, tab)}
               key={i}
-              style={{ width: tab.width, height: tab.height, backgroundColor: tab.bgColor ? tab.bgColor : 'orange' }}>
+              style={{ width: tab.width, height: tab.height, backgroundColor: tab.bgColor }}>
                 {tab.name}
               </li>;
           })}
