@@ -52,9 +52,8 @@ class ReactDropdown extends Component {
 
     const { opts } = this.state;
     const y = this.state.isOpen ? 0 : -this.state.dropdownHeight;
-    const styles = { 
-        transform: `translate(0px, ${y}px)` 
-    };
+    const dropdownStyle = { transform: `translate(0px, ${y}px)` };
+    const caretStyle = this.state.isOpen ? 'rd-arrow rotate' : 'rd-arrow';
     
     return (  
       <div className='rd-wrap'
@@ -65,11 +64,12 @@ class ReactDropdown extends Component {
                 key={i}
                 style={{ width: tab.width, height: tab.height, backgroundColor: tab.bgColor }}>
             {tab.name}
+            <div className={caretStyle}></div>
            </div>
           })}      
           <ul id='react-dropdown' 
               className='rd-tab-container open'
-              style={styles}
+              style={dropdownStyle}
               >
           {opts.tabs.filter(this.isNotTitle).map((tab, i)=> {
             return <li 

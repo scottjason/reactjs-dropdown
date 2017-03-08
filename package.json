@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ecstatic -p 3000 example & npm run watch",
     "watch": "watchify example/index.js -p browserify-hmr -t browserify-css -o example/dist/index.js -dv & stylus -u autoprefixer-stylus -w main.styl -o main.css",
-    "build": "./node_modules/.bin/babel index.js -o dist/index.js",
+    "build": "./node_modules/.bin/babel index.js -o dist/index.js & copyfiles main.css main.css dist",
     "prepublish": "npm run build"
   },
   "repository": {

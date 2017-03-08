@@ -46,49 +46,14 @@ var ReactDropdown = function (_Component) {
       this.state.dropdownHeight = tabs.map(this.extractHeight).reduce(this.sum);
     }
   }, {
-    key: 'extractHeight',
-    value: function extractHeight(o) {
-      return o.height;
-    }
-  }, {
     key: 'sum',
     value: function sum(a, v) {
       return a + v;
     }
   }, {
-    key: 'selectAll',
-    value: function selectAll(tab) {
-      tab.isSelected = true;
-      return tab;
-    }
-  }, {
-    key: 'bySelected',
-    value: function bySelected(tab) {
-      return tab.isSelected ? tab : null;
-    }
-  }, {
-    key: 'toggleSelected',
-    value: function toggleSelected(tabSelected) {
-      return function (tab) {
-        tab.isSelected = tab.name === tabSelected.name ? true : false;
-        return tab;
-      };
-    }
-  }, {
-    key: 'onSelectTab',
-    value: function onSelectTab(tab) {
-      var tabs = this.state.opts.tabs;
-
-      this.state.opts.tabs = tabs.map(this.toggleSelected(tab));
-      this.toggle();
-      if (!tab.isTitle) {
-        this.props.onTabSelected.call(this, tab);
-      }
-    }
-  }, {
-    key: 'toggle',
-    value: function toggle() {
-      this.setState({ isOpen: !this.state.isOpen });
+    key: 'extractHeight',
+    value: function extractHeight(o) {
+      return o.height;
     }
   }, {
     key: 'isTitle',
@@ -105,6 +70,30 @@ var ReactDropdown = function (_Component) {
       }
     }
   }, {
+    key: 'toggleDropdown',
+    value: function toggleDropdown() {
+      this.setState({ isOpen: !this.state.isOpen });
+    }
+  }, {
+    key: 'toggleSelected',
+    value: function toggleSelected(tabSelected) {
+      return function (tab) {
+        tab.isSelected = tab.name === tabSelected.name ? true : false;
+        return tab;
+      };
+    }
+  }, {
+    key: 'onSelectTab',
+    value: function onSelectTab(tab) {
+      var tabs = this.state.opts.tabs;
+
+      this.state.opts.tabs = tabs.map(this.toggleSelected(tab));
+      this.toggleDropdown();
+      if (!tab.isTitle) {
+        this.props.onTabSelected.call(this, tab);
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -112,9 +101,8 @@ var ReactDropdown = function (_Component) {
       var opts = this.state.opts;
 
       var y = this.state.isOpen ? 0 : -this.state.dropdownHeight;
-      var styles = {
-        transform: 'translate(0px, ' + y + 'px)'
-      };
+      var dropdownStyle = { transform: 'translate(0px, ' + y + 'px)' };
+      var caretStyle = this.state.isOpen ? 'rd-arrow rotate' : 'rd-arrow';
 
       return _react2.default.createElement(
         'div',
@@ -127,14 +115,15 @@ var ReactDropdown = function (_Component) {
               onClick: _this2.onSelectTab.bind(_this2, tab),
               key: i,
               style: { width: tab.width, height: tab.height, backgroundColor: tab.bgColor } },
-            tab.name
+            tab.name,
+            _react2.default.createElement('div', { className: caretStyle })
           );
         }),
         _react2.default.createElement(
           'ul',
           { id: 'react-dropdown',
             className: 'rd-tab-container open',
-            style: styles
+            style: dropdownStyle
           },
           opts.tabs.filter(this.isNotTitle).map(function (tab, i) {
             return _react2.default.createElement(
@@ -143,7 +132,7 @@ var ReactDropdown = function (_Component) {
                 className: 'rd-tab',
                 onClick: _this2.onSelectTab.bind(_this2, tab),
                 key: i,
-                style: { width: tab.width, height: tab.height, backgroundColor: tab.bgColor ? tab.bgColor : 'orange' } },
+                style: { width: tab.width, height: tab.height, backgroundColor: tab.bgColor } },
               tab.name
             );
           })
