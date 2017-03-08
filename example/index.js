@@ -19,6 +19,7 @@ class App extends Component {
     
     return (
       <div className='container'>
+        <nav></nav>
         <ReactDropdown opts={opts} />
       </div>
     )

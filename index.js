@@ -14,7 +14,6 @@ class ReactDropdown extends Component {
     Object.assign(this.state.opts, this.props.opts);
     let tabs = this.state.opts.tabs;
     this.state.dropdownHeight = tabs.map(this.extractHeight).reduce(this.sum);
-    // this.state.dropdownHeight = tabs.map(this.extractHeight).reduce(this.sum);
   }
   extractHeight(o) {
     return o.height;
@@ -55,11 +54,9 @@ class ReactDropdown extends Component {
   render() {
 
     let { opts } = this.state;
-    let dropdownStyle = this.state.isOpen ? 'rd-tab-container open' : 'rd-tab-container';    
-    const x = 0;
     const y = this.state.isOpen ? 0 : -this.state.dropdownHeight;
     const transform = { 
-        transform: `translate(${x}px, ${y}px)` 
+        transform: `translate(0px, ${y}px)` 
     };
     
     return (  
@@ -74,7 +71,7 @@ class ReactDropdown extends Component {
            </div>
           })}      
           <ul id='react-dropdown' 
-              className={dropdownStyle}
+              className='rd-tab-container open'
               style={transform}
               >
           {opts.tabs.filter(this.isNotTitle).map((tab, i)=> {
