@@ -3,15 +3,29 @@ import styles from './main.css';
 
 class ReactDropdown extends Component {
   constructor (props) {
-    super(props)
+    super(props);
     this.state = {
+      opts: {},
       isOpen: false,
-      opts: {}
+      dropdownHeight: 0
     }
   }
   componentWillMount() {
     Object.assign(this.state.opts, this.props.opts);
+    let tabs = this.state.opts.tabs;
+    this.state.dropdownHeight = tabs.map(this.extractHeight).reduce(this.sum);
+    // this.state.dropdownHeight = tabs.map(this.extractHeight).reduce(this.sum);
   }
+  extractHeight(o) {
+    return o.height;
+  }
+  sum(a, v) {
+    return a + v;
+  }
+  selectAll(tab) {
+    tab.isSelected = true;
+    return tab;
+  }  
   bySelected(tab) {
     return tab.isSelected ? tab : null;
   }
@@ -23,32 +37,52 @@ class ReactDropdown extends Component {
   }
   onSelectTab(tab) {
     let { tabs } = this.state.opts;
-    if (this.state.isOpen) {
-      this.state.opts.tabs = tabs.map(this.toggleSelected(tab));
-    } else {
-      this.state.opts.tabs = tabs.map(this.viewAll);
-    }
-    this.state.isOpen = !this.state.isOpen;
-    this.setState(this.state);
+    this.toggle();
   }
-  viewAll(tab) {
-    tab.isSelected = true;
-    return tab;
-  }  
+  toggle() {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+  isTitle(tab) {
+    if (tab.isTitle) {
+      return tab;
+    }
+  }
+  isNotTitle(tab) {
+    if (!tab.isTitle) {
+      return tab;
+    }
+  }
   render() {
 
     let { opts } = this.state;
-
-    return (
+    let dropdownStyle = this.state.isOpen ? 'rd-tab-container open' : 'rd-tab-container';    
+    const x = 0;
+    const y = this.state.isOpen ? 0 : -this.state.dropdownHeight;
+    const transform = { 
+        transform: `translate(${x}px, ${y}px)` 
+    };
+    
+    return (  
       <div className='rd-wrap'
            style={{ backgroundColor: opts.bgColor }}>
-         <ul className='rd-tab-container'>
-          {opts.tabs.filter(this.bySelected).map((tab, i)=> {
+          {opts.tabs.filter(this.isTitle).map((tab, i)=> {
+           return <div className='tab-title'
+                onClick={this.onSelectTab.bind(this, tab)}
+                key={i}
+                style={{ width: tab.width, height: tab.height, backgroundColor: tab.bgColor }}>
+            {tab.name}
+           </div>
+          })}      
+          <ul id='react-dropdown' 
+              className={dropdownStyle}
+              style={transform}
+              >
+          {opts.tabs.filter(this.isNotTitle).map((tab, i)=> {
             return <li 
               className='rd-tab'
               onClick={this.onSelectTab.bind(this, tab)}
               key={i}
-              style={{ width: opts.tabWidth, height: opts.tabHeight, backgroundColor: opts.bgColor }}>
+              style={{ width: tab.width, height: tab.height, backgroundColor: tab.bgColor ? tab.bgColor : 'orange' }}>
                 {tab.name}
               </li>;
           })}

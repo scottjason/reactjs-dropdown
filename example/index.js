@@ -6,16 +6,15 @@ class App extends Component {
   render() {
 
     let opts = {
-      tabWidth: 500,
-      tabHeight: 75,
       tabs: [
-        { name: 'EXTRA SMALL' }, 
-        { name: 'SMALL' }, 
-        { name: 'MEDIUM', isSelected: true }, 
-        { name: 'LARGE' },
-        { name: 'EXTRA LARGE' }
+        { name: 'SELECT SIZE', width: 500, height: 75, bgColor: '#4EBABA', isTitle: true },
+        { name: 'EXTRA SMALL', width: 500, height: 75, bgColor: '#4EBABA' }, 
+        { name: 'SMALL', width: 500, height: 75, bgColor: '#4EBABA' }, 
+        { name: 'MEDIUM', width: 500, height: 75, bgColor: '#4EBABA', isSelected: true }, 
+        { name: 'LARGE', width: 500, height: 75, bgColor: '#4EBABA' },
+        { name: 'EXTRA LARGE', width: 500, height: 75, bgColor: '#4EBABA' },
       ],
-      bgColor: '#4EBABA'
+      translate: true
     };
     
     return (

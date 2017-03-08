@@ -19,7 +19,7 @@ html, body {
   min-height: 60px;
 }
 
-.rd-tab {
+.rd-tab, .tab-title {
   font-size: 24px;
   font-family: 'Lato', sans-serif;  
 }
