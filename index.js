@@ -36,7 +36,11 @@ class ReactDropdown extends Component {
   }
   onSelectTab(tab) {
     let { tabs } = this.state.opts;
+    this.state.opts.tabs = tabs.map(this.toggleSelected(tab));
     this.toggle();
+    if (!tab.isTitle) {
+      this.props.onTabSelected.call(this, tab);
+    }
   }
   toggle() {
     this.setState({ isOpen: !this.state.isOpen });
@@ -53,9 +57,9 @@ class ReactDropdown extends Component {
   }
   render() {
 
-    let { opts } = this.state;
+    const { opts } = this.state;
     const y = this.state.isOpen ? 0 : -this.state.dropdownHeight;
-    const transform = { 
+    const styles = { 
         transform: `translate(0px, ${y}px)` 
     };
     
@@ -72,7 +76,7 @@ class ReactDropdown extends Component {
           })}      
           <ul id='react-dropdown' 
               className='rd-tab-container open'
-              style={transform}
+              style={styles}
               >
           {opts.tabs.filter(this.isNotTitle).map((tab, i)=> {
             return <li 

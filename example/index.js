@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import ReactDropdown from '../index.js';
 
 class App extends Component {
+  onTabSelected(tab) {
+    console.log('Tab Selected', tab);
+  }
   render() {
 
     let opts = {
@@ -20,7 +23,7 @@ class App extends Component {
     return (
       <div className='container'>
         <nav></nav>
-        <ReactDropdown opts={opts} />
+        <ReactDropdown opts={opts} onTabSelected={this.onTabSelected} />
       </div>
     )
   }

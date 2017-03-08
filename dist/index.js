@@ -31,31 +31,119 @@ var ReactDropdown = function (_Component) {
     var _this = _possibleConstructorReturn(this, (ReactDropdown.__proto__ || Object.getPrototypeOf(ReactDropdown)).call(this, props));
 
     _this.state = {
-      isOpen: false
+      opts: {},
+      isOpen: false,
+      dropdownHeight: 0
     };
     return _this;
   }
 
   _createClass(ReactDropdown, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      Object.assign(this.state.opts, this.props.opts);
+      var tabs = this.state.opts.tabs;
+      this.state.dropdownHeight = tabs.map(this.extractHeight).reduce(this.sum);
+    }
+  }, {
+    key: 'extractHeight',
+    value: function extractHeight(o) {
+      return o.height;
+    }
+  }, {
+    key: 'sum',
+    value: function sum(a, v) {
+      return a + v;
+    }
+  }, {
+    key: 'selectAll',
+    value: function selectAll(tab) {
+      tab.isSelected = true;
+      return tab;
+    }
+  }, {
+    key: 'bySelected',
+    value: function bySelected(tab) {
+      return tab.isSelected ? tab : null;
+    }
+  }, {
+    key: 'toggleSelected',
+    value: function toggleSelected(tabSelected) {
+      return function (tab) {
+        tab.isSelected = tab.name === tabSelected.name ? true : false;
+        return tab;
+      };
+    }
+  }, {
+    key: 'onSelectTab',
+    value: function onSelectTab(tab) {
+      var tabs = this.state.opts.tabs;
+
+      this.state.opts.tabs = tabs.map(this.toggleSelected(tab));
+      this.toggle();
+      if (!tab.isTitle) {
+        this.props.onTabSelected.call(this, tab);
+      }
+    }
+  }, {
+    key: 'toggle',
+    value: function toggle() {
+      this.setState({ isOpen: !this.state.isOpen });
+    }
+  }, {
+    key: 'isTitle',
+    value: function isTitle(tab) {
+      if (tab.isTitle) {
+        return tab;
+      }
+    }
+  }, {
+    key: 'isNotTitle',
+    value: function isNotTitle(tab) {
+      if (!tab.isTitle) {
+        return tab;
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var opts = this.props.opts;
+      var _this2 = this;
 
+      var opts = this.state.opts;
+
+      var y = this.state.isOpen ? 0 : -this.state.dropdownHeight;
+      var styles = {
+        transform: 'translate(0px, ' + y + 'px)'
+      };
 
       return _react2.default.createElement(
         'div',
         { className: 'rd-wrap',
           style: { backgroundColor: opts.bgColor } },
+        opts.tabs.filter(this.isTitle).map(function (tab, i) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'tab-title',
+              onClick: _this2.onSelectTab.bind(_this2, tab),
+              key: i,
+              style: { width: tab.width, height: tab.height, backgroundColor: tab.bgColor } },
+            tab.name
+          );
+        }),
         _react2.default.createElement(
           'ul',
-          { className: 'rd-tab-container' },
-          opts.tabs.map(function (tab, i) {
+          { id: 'react-dropdown',
+            className: 'rd-tab-container open',
+            style: styles
+          },
+          opts.tabs.filter(this.isNotTitle).map(function (tab, i) {
             return _react2.default.createElement(
               'li',
               {
                 className: 'rd-tab',
+                onClick: _this2.onSelectTab.bind(_this2, tab),
                 key: i,
-                style: { width: opts.tabWidth, height: opts.tabHeight, backgroundColor: opts.bgColor } },
+                style: { width: tab.width, height: tab.height, backgroundColor: tab.bgColor ? tab.bgColor : 'orange' } },
               tab.name
             );
           })
