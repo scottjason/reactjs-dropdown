@@ -39,6 +39,10 @@
   "peerDependencies": {
     "webpack": "^2.1.0-beta"
   },
+  "dependencies": {
+    "inline-style-prefixer": "^3.0.1",
+    "react": "^15.4.2"    
+  },
   "devDependencies": {
     "autoprefixer-stylus": "^0.13.0",
     "babel-cli": "^6.23.0",
@@ -54,8 +58,6 @@
     "classnames": "^2.2.5",
     "css-in-js-utils": "^1.0.3",
     "ecstatic": "^2.1.0",
-    "inline-style-prefixer": "^3.0.1",
-    "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "watchify": "^3.9.0",
     "webpack": "^2.2.1"
