@@ -22,4 +22,5 @@ node_modules
 
 .DS_Store
 
+dist
 example/dist

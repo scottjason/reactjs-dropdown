@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import ReactDropdown from '../index.js';
+import ReactDropdown from '../dist/index.js';
 
 class App extends Component {
   onTabSelected(tab) {
@@ -9,13 +9,15 @@ class App extends Component {
   render() {
 
     let opts = {
+      width: 500,
+      height: 75,
       tabs: [
-        { name: 'SELECT SIZE', width: 500, height: 75, bgColor: '#4EBABA', isTitle: true },
-        { name: 'EXTRA SMALL', width: 500, height: 75, bgColor: '#4EBABA' }, 
-        { name: 'SMALL', width: 500, height: 75, bgColor: '#4EBABA' }, 
-        { name: 'MEDIUM', width: 500, height: 75, bgColor: '#4EBABA', isSelected: true }, 
-        { name: 'LARGE', width: 500, height: 75, bgColor: '#4EBABA' },
-        { name: 'EXTRA LARGE', width: 500, height: 75, bgColor: '#4EBABA' },
+        { name: 'SELECT SIZE', bgColor: '#4EBABA', isTitle: true },
+        { name: 'EXTRA SMALL', bgColor: '#4EBABA' }, 
+        { name: 'SMALL', bgColor: '#4EBABA' }, 
+        { name: 'MEDIUM', bgColor: '#4EBABA', isSelected: true }, 
+        { name: 'LARGE', bgColor: '#4EBABA' },
+        { name: 'EXTRA LARGE', bgColor: '#4EBABA' },
       ],
       translate: true
     };

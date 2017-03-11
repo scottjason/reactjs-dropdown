@@ -77,14 +77,10 @@ class ReactDropdown extends Component {
   }
   componentWillMount() {
     Object.assign(this.state.opts, this.props.opts);
-    let tabs = this.state.opts.tabs;
-    this.state.dropdownHeight = tabs.map(this.extractHeight).reduce(this.sum);
+    this.state.dropdownHeight = this.extractHeight(this.state.opts);
   }
-  sum(a, v) {
-    return a + v;
-  } 
   extractHeight(o) {
-    return o.height;
+    return o.height * o.tabs.length;
   }
   isTitle(tab) {
     if (tab.isTitle) {
@@ -125,7 +121,7 @@ class ReactDropdown extends Component {
            return <div onClick={this.onSelectTab.bind(this, tab)}
                 key={i}
                 className='rd-ctrl'
-                style={Object.assign({ width: tab.width, height: tab.height, backgroundColor: tab.bgColor }, styles.rdCtrl)}>
+                style={Object.assign({ width: opts.width, height: opts.height, backgroundColor: tab.bgColor }, styles.rdCtrl)}>
             {tab.name}
             <div style={Object.assign({}, styles.rdArrow, rotate )}></div>
            </div>
@@ -136,7 +132,7 @@ class ReactDropdown extends Component {
               onClick={this.onSelectTab.bind(this, tab)}
               key={i}
               className='rd-tab'
-              style={Object.assign({ width: tab.width, height: tab.height, backgroundColor: tab.bgColor }, styles.rdTab)}>
+              style={Object.assign({ width: opts.width, height: opts.height, backgroundColor: tab.bgColor }, styles.rdTab)}>
                 {tab.name}
               </li>;
           })}
