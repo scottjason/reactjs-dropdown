@@ -5,10 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "ecstatic -p 3000 example & npm run watch",
-    "clean": "rm -r dist/* & mkdir dist",
     "watch": "watchify example/index.js -p browserify-hmr -t browserify-css -o example/dist/index.js -dv",
     "build": "babel index.js -o dist/index.js",
-    "prepublish": "npm run clean & npm run build"
+    "prepublish": "mkdirp dist && npm run build"
   },
   "repository": {
     "type": "git",
@@ -41,7 +40,7 @@
   },
   "dependencies": {
     "inline-style-prefixer": "^3.0.1",
-    "react": "^15.4.2"    
+    "react": "^15.4.2"
   },
   "devDependencies": {
     "autoprefixer-stylus": "^0.13.0",
@@ -58,6 +57,7 @@
     "classnames": "^2.2.5",
     "css-in-js-utils": "^1.0.3",
     "ecstatic": "^2.1.0",
+    "mkdirp": "^0.5.1",
     "react-dom": "^15.4.2",
     "watchify": "^3.9.0",
     "webpack": "^2.2.1"
