@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './main.css';
 
 class ReactDropdown extends Component {
   constructor (props) {
