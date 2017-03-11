@@ -1,4 +1,70 @@
 import React, { Component } from 'react';
+import Prefixer from 'inline-style-prefixer';
+
+const prefixer = new Prefixer();
+const styles = prefixer.prefix({
+  rdWrap: {
+    position: 'absolute',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    margin: 0,
+    width: 'auto',
+    height: 'auto'
+  },
+  rdInner: {
+    position: 'relative',
+    margin: 0,
+    padding: 0,
+    blackfaceVisibility: 'hidden',
+    transform: 'translate3d(0,0,0)',
+    transition: 'all .4s ease'
+  },
+  rdCtrl: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    listStyle: 'none',
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 24,
+    borderBottom: '1px solid white',
+    cursor: 'pointer',
+    userSelect: 'none',
+    zIndex: 100
+  },
+  rdTab: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    listStyle: 'none',
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 24,
+    borderBottom: '1px solid white',
+    cursor: 'pointer',
+    userSelect: 'none'    
+  },
+  rdArrow: {
+    position: 'absolute',
+    top: 0,
+    bottom: 4,
+    right: 0,
+    width: 12,
+    height: 12,
+    margin: 'auto',
+    marginRight: 20,
+    borderTop: '2px solid white',
+    borderRight: '2px solid white',
+    transform: 'rotate(135deg)',
+    transition: 'all .4s ease'
+  },
+  rotate: {
+    transform: 'rotate(320deg)'
+  }
+});
 
 class ReactDropdown extends Component {
   constructor (props) {
@@ -51,31 +117,26 @@ class ReactDropdown extends Component {
 
     const { opts } = this.state;
     const y = this.state.isOpen ? 0 : -this.state.dropdownHeight;
-    const dropdownStyle = { transform: `translate(0px, ${y}px)` };
-    const caretStyle = this.state.isOpen ? 'rd-arrow rotate' : 'rd-arrow';
-    
+    const rotate = this.state.isOpen ? styles.rotate : null;
+
     return (  
-      <div className='rd-wrap'
-           style={{ backgroundColor: opts.bgColor }}>
-          {opts.tabs.filter(this.isTitle).map((tab, i)=> {
-           return <div className='tab-title'
-                onClick={this.onSelectTab.bind(this, tab)}
+      <div style={Object.assign({ backgroundColor: opts.bgColor }, styles.rdWrap)}>
+        {opts.tabs.filter(this.isTitle).map((tab, i)=> {
+           return <div onClick={this.onSelectTab.bind(this, tab)}
                 key={i}
-                style={{ width: tab.width, height: tab.height, backgroundColor: tab.bgColor }}>
+                className='rd-ctrl'
+                style={Object.assign({ width: tab.width, height: tab.height, backgroundColor: tab.bgColor }, styles.rdCtrl)}>
             {tab.name}
-            <div className={caretStyle}></div>
+            <div style={Object.assign({}, styles.rdArrow, rotate )}></div>
            </div>
-          })}      
-          <ul id='react-dropdown' 
-              className='rd-tab-container open'
-              style={dropdownStyle}
-              >
+          })} 
+          <ul style={Object.assign({}, styles.rdInner, { transform: `translate(0px, ${y}px)` })}>
           {opts.tabs.filter(this.isNotTitle).map((tab, i)=> {
             return <li 
-              className='rd-tab'
               onClick={this.onSelectTab.bind(this, tab)}
               key={i}
-              style={{ width: tab.width, height: tab.height, backgroundColor: tab.bgColor }}>
+              className='rd-tab'
+              style={Object.assign({ width: tab.width, height: tab.height, backgroundColor: tab.bgColor }, styles.rdTab)}>
                 {tab.name}
               </li>;
           })}

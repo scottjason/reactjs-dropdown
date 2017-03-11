@@ -16,7 +16,7 @@ nav {
   z-index: 101;
 }
 
-.container {
+.ex-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -27,7 +27,7 @@ nav {
   min-height: 60px;
 }
 
-.rd-tab, .tab-title {
+.rd-tab, .rd-ctrl {
   font-size: 24px;
   font-family: 'Lato', sans-serif;
 }

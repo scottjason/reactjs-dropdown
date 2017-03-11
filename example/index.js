@@ -21,7 +21,7 @@ class App extends Component {
     };
     
     return (
-      <div className='container'>
+      <div className='ex-container'>
         <nav></nav>
         <ReactDropdown opts={opts} onTabSelected={this.onTabSelected} />
       </div>
