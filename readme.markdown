@@ -70,7 +70,7 @@ Takes an options object and an `onTabSelected` callback:
   };
 ```
 
-One `isCtrl` and one `isTitle` key are required. `isSelected` lets the dropdown know which tab it should start on, while `isCtrl` determines the controller tab which is the tab at the top of the dropdown. You can also pass in different tab background colors for a gradient-like effect.
+One `isCtrl` and one `isSelected` key are required. `isSelected` lets the dropdown know which tab it should start on, while `isCtrl` determines the controller tab which is the tab at the top of the dropdown. You can also pass in different tab background colors for a gradient-like effect.
 
 ## Installation
 

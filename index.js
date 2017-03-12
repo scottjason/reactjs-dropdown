@@ -82,13 +82,13 @@ class ReactDropdown extends Component {
   extractHeight(o) {
     return o.height * o.tabs.length;
   }
-  isTitle(tab) {
-    if (tab.isTitle) {
+  isCtrl(tab) {
+    if (tab.isCtrl) {
       return tab;
     }
   }
-  isNotTitle(tab) {
-    if (!tab.isTitle) {
+  isNotCtrl(tab) {
+    if (!tab.isCtrl) {
       return tab;
     }
   }  
@@ -105,7 +105,7 @@ class ReactDropdown extends Component {
     let { tabs } = this.state.opts;
     this.state.opts.tabs = tabs.map(this.toggleSelected(tab));
     this.toggleDropdown();
-    if (!tab.isTitle) {
+    if (!tab.isCtrl) {
       this.props.onTabSelected.call(this, tab);
     }
   }
@@ -117,7 +117,7 @@ class ReactDropdown extends Component {
 
     return (  
       <div style={Object.assign({ backgroundColor: opts.bgColor }, styles.rdWrap)}>
-        {opts.tabs.filter(this.isTitle).map((tab, i)=> {
+        {opts.tabs.filter(this.isCtrl).map((tab, i)=> {
            return <div onClick={this.onSelectTab.bind(this, tab)}
                 key={i}
                 className='rd-ctrl'
@@ -127,7 +127,7 @@ class ReactDropdown extends Component {
            </div>
           })} 
           <ul style={Object.assign({}, styles.rdInner, { transform: `translate(0px, ${y}px)` })}>
-          {opts.tabs.filter(this.isNotTitle).map((tab, i)=> {
+          {opts.tabs.filter(this.isNotCtrl).map((tab, i)=> {
             return <li 
               onClick={this.onSelectTab.bind(this, tab)}
               key={i}

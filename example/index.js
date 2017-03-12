@@ -12,7 +12,7 @@ class App extends Component {
       width: 500,
       height: 75,
       tabs: [
-        { name: 'SELECT SIZE', bgColor: '#4EBABA', isTitle: true },
+        { name: 'SELECT SIZE', bgColor: '#4EBABA', isCtrl: true },
         { name: 'EXTRA SMALL', bgColor: '#4EBABA' }, 
         { name: 'SMALL', bgColor: '#4EBABA' }, 
         { name: 'MEDIUM', bgColor: '#4EBABA', isSelected: true }, 
